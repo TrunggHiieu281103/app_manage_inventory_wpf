@@ -1,0 +1,81 @@
+﻿<Window x:Class="manage_inventory.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:manage_inventory"
+        mc:Ignorable="d"
+        xmlns:uc="clr-namespace:manage_inventory.UserControllBar"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextElement.FontWeight="Regular"
+    TextElement.FontSize="13"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Title="Login" Height="300" Width="400">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <uc:UserControlBarUC></uc:UserControlBarUC>
+        </Grid>
+        
+        <materialDesign:Card Grid.Row="1" Width="330" Height="150" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="Grid">
+                        <Setter Property="Margin" Value="15 0 15 0"></Setter>
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <TextBox
+                    VerticalAlignment="Center"
+                    materialDesign:HintAssist.Hint="Username"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                </Grid>
+                <Grid Grid.Row="1">
+                    <PasswordBox
+                     x:Name="FloatingPasswordBox"
+                     materialDesign:HintAssist.Foreground="Green"
+                     materialDesign:HintAssist.Hint="Password"
+                     materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Grid.Column="0"
+                        Width="100"
+                        Content="Login"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        ToolTip="Resource name: MaterialDesignRaisedButton" />
+                    <Button
+                        Grid.Column="1"
+                        Width="100"
+                        Content="Exit"
+                        Background="Red"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        ToolTip="Resource name: MaterialDesignRaisedButton" />
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+</Window>
