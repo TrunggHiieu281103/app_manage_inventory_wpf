@@ -1,4 +1,5 @@
-﻿using System;
+﻿using manage_inventory.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,11 @@ namespace manage_inventory.UserControllBar
     /// </summary>
     public partial class UserControlBarUC : UserControl
     {
+        public ControlBarViewModel Viewmodel { get; set; }
         public UserControlBarUC()
         {
             InitializeComponent();
+            this.DataContext = Viewmodel = new ControlBarViewModel();
         }
     }
 }

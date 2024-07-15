@@ -5,8 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:manage_inventory.UserControllBar"
              mc:Ignorable="d" 
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             >
+             x:Name="ucControlBar">
+        
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="MouseLeftButtonDown">
+            <i:InvokeCommandAction Command="{Binding MouseMoveWindowCommand}" CommandParameter="{Binding ElementName=ucControlBar}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <materialDesign:ColorZone Mode="PrimaryLight">
             <DockPanel>
@@ -17,14 +24,20 @@
                             <Setter Property="Width" Value="40"></Setter>
                         </Style>
                     </StackPanel.Resources>
-                    
-                    <Button ToolTip="Cut" ToolBar.OverflowMode="AsNeeded" Background="ForestGreen"
+
+                    <Button Command="{Binding MinimizeWindowCommand}"
+                            CommandParameter="{Binding ElementName=ucControlBar}"
+                        ToolTip="Cut" ToolBar.OverflowMode="AsNeeded" Background="ForestGreen"
                         Content="{materialDesign:PackIcon Kind=WindowMinimize}"/>
-                    
-                    <Button ToolTip="Cut" ToolBar.OverflowMode="AsNeeded" Background="ForestGreen"
+
+                    <Button Command="{Binding MaximizeWindowCommand}"
+                            CommandParameter="{Binding ElementName=ucControlBar}"
+                        ToolTip="Cut" ToolBar.OverflowMode="AsNeeded" Background="ForestGreen"
                         Content="{materialDesign:PackIcon Kind=WindowMaximize}"/>
-                    
-                    <Button ToolTip="Cut" ToolBar.OverflowMode="AsNeeded" Background="Red"
+
+                    <Button Command="{Binding CloseWindowCommand}"
+                            CommandParameter="{Binding ElementName=ucControlBar}"
+                        ToolTip="Cut" ToolBar.OverflowMode="AsNeeded" Background="Red"
                         Content="{materialDesign:PackIcon Kind=WindowClose}"/>
                     
                 </StackPanel>
@@ -32,7 +45,7 @@
                 <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
                     <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
                     <TextBlock Margin="16,0,0,0" VerticalAlignment="Center"
-                        Text="Material Design In XAML Toolkit" />
+                        Text="{Binding Tag, ElementName=ucControlBar}" />
                 </StackPanel>
                 
             </DockPanel>
