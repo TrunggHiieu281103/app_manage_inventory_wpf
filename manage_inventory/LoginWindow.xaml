@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:manage_inventory"
         mc:Ignorable="d"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:uc="clr-namespace:manage_inventory.UserControllBar"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -18,6 +19,7 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Name="loginWindow"
+        DataContext="{StaticResource LoginVM}"
         Title="Login" Height="300" Width="400">
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -46,6 +48,7 @@
                     <TextBox
                     VerticalAlignment="Center"
                     materialDesign:HintAssist.Hint="Username"
+                    Text="{Binding UserName}"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                 </Grid>
                 <Grid Grid.Row="1">
@@ -54,7 +57,13 @@
                      materialDesign:HintAssist.Foreground="Green"
                      materialDesign:HintAssist.Hint="Password"
                      materialDesign:TextFieldAssist.UnderlineBrush="Green"
-                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PasswordChanged">
+                                <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding ElementName=FloatingPasswordBox}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </PasswordBox>
                 </Grid>
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
@@ -64,6 +73,8 @@
                     <Button
                         Grid.Column="0"
                         Width="100"
+                        Command="{Binding LoginCommand}"
+                        CommandParameter="{Binding ElementName=loginWindow}"
                         Content="Login"
                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                         Style="{StaticResource MaterialDesignRaisedButton}"
