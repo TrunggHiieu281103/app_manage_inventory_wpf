@@ -68,7 +68,7 @@
                                     <GridViewColumn Header="Phone" DisplayMemberBinding="{Binding Phone}"></GridViewColumn>
                                     <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"></GridViewColumn>
                                     <GridViewColumn Header="More info" DisplayMemberBinding="{Binding MoreInfo}"></GridViewColumn>
-                                    <GridViewColumn Header="Constract date" DisplayMemberBinding="{Binding ContractDate}"></GridViewColumn>
+                                    <GridViewColumn Header="Contract date" DisplayMemberBinding="{Binding ContractDate}"></GridViewColumn>
 
                                 </GridView>
                             </ListView.View>
