@@ -11,11 +11,13 @@ namespace manage_inventory.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
-
+        public bool IsLoaded = false;
         public ICommand LoadedWindowCommand { get; set; }
+        public ICommand UnitCommand { get; set; }
+        public ICommand SuplierCommand { get; set; }
+        public ICommand CustomerCommand { get; set; }
 
         // handle logic for MainWindow.xaml
-        public bool IsLoaded = false;
         public MainViewModel()
         {
 
@@ -25,7 +27,11 @@ namespace manage_inventory.ViewModel
                 loginWindow.ShowDialog();
                 }
             );
-            
+
+            UnitCommand = new RelayCommand<object>((p) => { return true; }, (p) => { UnitWindow wd = new UnitWindow(); wd.ShowDialog(); } );
+            SuplierCommand = new RelayCommand<object>((p) => { return true; }, (p) => { SuplierWindow wd = new SuplierWindow(); wd.ShowDialog(); } );
+            CustomerCommand = new RelayCommand<object>((p) => { return true; }, (p) => { CustomerWindow wd = new CustomerWindow(); wd.ShowDialog(); } );
+
         }
     }
 }
