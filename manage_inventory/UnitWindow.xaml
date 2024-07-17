@@ -19,6 +19,8 @@ FontFamily="{DynamicResource MaterialDesignFont}"
    WindowStyle="None"
    WindowStartupLocation="CenterScreen"
         
+        DataContext="{StaticResource UnitVM}"
+    
         x:Name="window"
         Title="Unit" Height="430" Width="400">
     <Grid>
@@ -40,7 +42,7 @@ FontFamily="{DynamicResource MaterialDesignFont}"
             <!--elements binding from selected item-->
             <materialDesign:Card Grid.Row="0" Margin="5">
                 <Grid>
-                    <TextBox Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" Margin="5" materialDesign:HintAssist.Hint="Unit name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <TextBox Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" materialDesign:HintAssist.Hint="Unit name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                 </Grid>
             </materialDesign:Card>
 
@@ -48,7 +50,7 @@ FontFamily="{DynamicResource MaterialDesignFont}"
                 <WrapPanel>
                     <Button Command="{Binding AddCommand}" Content="Add" Margin="5" Width="100"></Button>
                     <Button Command="{Binding EditCommand}" Content="Update" Margin="5" Width="100"></Button>
-                    <Button Command="{Binding DeleteCommand}" Content="Delete" Margin="5" Width="100"></Button>
+                    <!--<Button Command="{Binding DeleteCommand}" Content="Delete" Margin="5" Width="100"></Button>-->
                 </WrapPanel>
             </materialDesign:Card>
 
