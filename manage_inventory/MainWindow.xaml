@@ -345,6 +345,8 @@
                                         <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
                                         <GridViewColumn Header="Supply name" DisplayMemberBinding="{Binding Object.DisplayName}"></GridViewColumn>
                                         <GridViewColumn Header="Available" DisplayMemberBinding="{Binding Count}"></GridViewColumn>
+                                        <GridViewColumn Header="Unit" DisplayMemberBinding="{Binding unitName}"></GridViewColumn>
+                                        <GridViewColumn Header="Suplier" DisplayMemberBinding="{Binding supplierName}"></GridViewColumn>
                                     </GridView>
                                 </ListView.View>
                             </ListView>
