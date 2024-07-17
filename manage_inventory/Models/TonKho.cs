@@ -13,5 +13,8 @@ namespace manage_inventory.Models
         public int STT { get; set; }
 
         public int Count { get; set;}
+        public string unitName { get; set; }
+
+        public string supplierName { get; set; }
     }
 }

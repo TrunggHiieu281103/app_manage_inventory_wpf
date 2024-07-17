@@ -68,13 +68,15 @@ namespace manage_inventory.ViewModel
             TonKhoList = new ObservableCollection<TonKho>();
 
             int i = 1;
-            var objectList = DataProvider.ins.DB.Objects.ToList(); // Fetch all objects first to close the DataReader
+            var objectList = DataProvider.ins.DB.Objects.ToList(); 
             foreach (var item in objectList)
             {
                 int sumInput = 0;
                 int sumOutput = 0;
+                string unitName = "";
+                string supplierName = "";
 
-                using (var context = new QuanLyKhoContext()) // Use a new context for each query
+                using (var context = new QuanLyKhoContext()) 
                 {
                     var inputList = context.InputInfos.Where(p => p.IdObject == item.Id).ToList();
                     if (inputList != null)
@@ -83,7 +85,7 @@ namespace manage_inventory.ViewModel
                     }
                 }
 
-                using (var context = new QuanLyKhoContext()) // Use a new context for each query
+                using (var context = new QuanLyKhoContext())
                 {
                     var outputList = context.OutputInfos.Where(p => p.IdObject == item.Id).ToList();
                     if (outputList != null)
@@ -92,10 +94,30 @@ namespace manage_inventory.ViewModel
                     }
                 }
 
+                using (var context = new QuanLyKhoContext())
+                {
+                    var unitList = context.Units.Where(p => p.Id == item.IdUnit).SingleOrDefault();
+                    if (unitList != null)
+                    {
+                        unitName = unitList.DisplayName;
+                    }
+                }
+
+                using (var context = new QuanLyKhoContext())
+                {
+                    var supplierList = context.Supliers.Where(p => p.Id == item.IdSuplier).SingleOrDefault();
+                    if (supplierList != null)
+                    {
+                        supplierName = supplierList.DisplayName;
+                    }
+                }
+
                 TonKho tonkho = new TonKho();
                 tonkho.STT = i;
                 tonkho.Count = sumInput - sumOutput;
                 tonkho.Object = item;
+                tonkho.unitName = unitName;
+                tonkho.supplierName = supplierName;
 
                 TonKhoList.Add(tonkho);
                 i++;
