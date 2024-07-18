@@ -1,37 +1,23 @@
-﻿using manage_inventory.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace manage_inventory.Models;
 
-public partial class Suplier : BaseViewModel
+public partial class Suplier
 {
-    public Suplier()
-    {
-        this.Objects = new HashSet<Object>();
-    }
+    public int Id { get; set; }
 
-    private int _Id { get; set; }
-    public int Id { get => _Id; set { _Id = value; OnPropertyChanged(); } }
+    public string? DisplayName { get; set; }
 
-    private string _DisplayName;
-    public string DisplayName { get => _DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
+    public string? Address { get; set; }
 
-    string _Address;
-    public string Address { get => _Address; set { _Address = value; OnPropertyChanged(); } }
+    public string? Phone { get; set; }
 
-    string _Phone;
-    public string Phone { get => _Phone; set { _Phone = value; OnPropertyChanged(); } }
+    public string? Email { get; set; }
 
-    string _Email;
-    public string Email { get => _Email; set { _Email = value; OnPropertyChanged(); } }
+    public string? MoreInfo { get; set; }
 
-    string _MoreInfo;
-    public string MoreInfo { get => _MoreInfo; set { _MoreInfo = value; OnPropertyChanged(); } }
+    public DateTime? ContractDate { get; set; }
 
-    Nullable<System.DateTime> _ContractDate;
-    public Nullable<System.DateTime> ContractDate { get => _ContractDate; set { _ContractDate = value; OnPropertyChanged(); } }
-
-
-    public virtual ICollection<Object> Objects { get; set; }
+    public virtual ICollection<Object> Objects { get; set; } = new List<Object>();
 }

@@ -1,39 +1,27 @@
-﻿using manage_inventory.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace manage_inventory.Models;
 
-public partial class Object : BaseViewModel
+public partial class Object
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Object()
-    {
-        this.InputInfoes = new HashSet<InputInfo>();
-        this.OutputInfoes = new HashSet<OutputInfo>();
-    }
+    public string Id { get; set; } = null!;
 
-    private string _Id;
-    public string Id { get => _Id; set { _Id = value; OnPropertyChanged(); } }
+    public string? DisplayName { get; set; }
 
-    private string _DisplayName;
-    public string DisplayName { get => _DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
+    public int IdUnit { get; set; }
 
-    private int _IdUnit;
-    public int IdUnit { get => _IdUnit; set { _IdUnit = value; OnPropertyChanged(); } }
+    public int IdSuplier { get; set; }
 
-    private int _IdSuplier;
-    public int IdSuplier { get => _IdSuplier; set { _IdSuplier = value; OnPropertyChanged(); } }
+    public string? Qrcode { get; set; }
 
-    private string _QRCode;
-    public string QRCode { get => _QRCode; set { _QRCode = value; OnPropertyChanged(); } }
+    public string? BarCode { get; set; }
 
-    private string _BarCode;
-    public string BarCode { get => _BarCode; set { _BarCode = value; OnPropertyChanged(); } }
+    public virtual Suplier IdSuplierNavigation { get; set; } = null!;
 
-    public virtual Suplier Suplier { get; set; }
-    public virtual Unit Unit { get; set; }
+    public virtual Unit IdUnitNavigation { get; set; } = null!;
 
-    public virtual ICollection<InputInfo> InputInfoes { get; set; }
-    public virtual ICollection<OutputInfo> OutputInfoes { get; set; }
+    public virtual ICollection<InputInfo> InputInfos { get; set; } = new List<InputInfo>();
+
+    public virtual ICollection<OutputInfo> OutputInfos { get; set; } = new List<OutputInfo>();
 }
