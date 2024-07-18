@@ -60,7 +60,10 @@ namespace manage_inventory.ViewModel
 
             AddCommand = new RelayCommand<object>((p) =>
             {
+                if (DisplayName != null || Phone != null || Address != null || Email != null || ContractDate != null || MoreInfo != null)
                 return true;
+
+                return false;
 
             }, (p) =>
             {
