@@ -18,7 +18,7 @@
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        
+        DataContext="{StaticResource SuplierVM}"
         x:Name="window"
         Title="Suplier" Height="500" Width="900">
         <Grid>
