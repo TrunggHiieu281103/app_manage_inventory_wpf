@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection.Metadata;
+using System.Windows;
 using System.Windows.Input;
 using manage_inventory.Models;
 
@@ -59,7 +61,7 @@ namespace manage_inventory.ViewModel
 
             AddCommand = new RelayCommand<object>((p) =>
             {
-                if (string.IsNullOrEmpty(DisplayName) || string.IsNullOrEmpty(Address) || string.IsNullOrEmpty(Phone))
+                if (string.IsNullOrEmpty(DisplayName) || string.IsNullOrEmpty(Address) || string.IsNullOrEmpty(Phone) || ContractDate == null)
                     return false;
                 return true;
             }, (p) =>
@@ -82,6 +84,8 @@ namespace manage_inventory.ViewModel
 
             EditCommand = new RelayCommand<object>((p) =>
             {
+                if (string.IsNullOrEmpty(DisplayName) || string.IsNullOrEmpty(Address) || string.IsNullOrEmpty(Phone) || ContractDate == null)
+                    return false;
                 if (SelectedItem == null)
                     return false;
                 var displayList = DataProvider.ins.DB.Customers.Where(x => x.Id == SelectedItem.Id);
@@ -120,11 +124,20 @@ namespace manage_inventory.ViewModel
                 return false;
             }, (p) =>
             {
-                var customer = DataProvider.ins.DB.Customers.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
-                DataProvider.ins.DB.Customers.Remove(customer);
-                DataProvider.ins.DB.SaveChanges();
+                try
+                {
+                    var customer = DataProvider.ins.DB.Customers.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
+                    DataProvider.ins.DB.Customers.Remove(customer);
+                    DataProvider.ins.DB.SaveChanges();
 
-                List.Remove(customer);
+                    List.Remove(customer);
+                }
+                catch (Exception)
+                {
+
+                    MessageBox.Show("Can not delete this customer");
+                }
+              
             });
         }
     }

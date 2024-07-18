@@ -1,8 +1,10 @@
 ﻿using manage_inventory.Models;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace manage_inventory.ViewModel
@@ -67,12 +69,28 @@ namespace manage_inventory.ViewModel
 
             }, (p) =>
             {
-                var Suplier = new Suplier() { DisplayName = DisplayName, Phone = Phone, Address = Address, Email = Email, ContractDate = ContractDate, MoreInfo = MoreInfo };
+                try
+                {
+                    if (!DisplayName.IsNullOrEmpty() && !Phone.IsNullOrEmpty() && !Address.IsNullOrEmpty() && !Email.IsNullOrEmpty() && ContractDate != null && !MoreInfo.IsNullOrEmpty())
+                    {
+                        var Suplier = new Suplier() { DisplayName = DisplayName, Phone = Phone, Address = Address, Email = Email, ContractDate = ContractDate, MoreInfo = MoreInfo };
 
-                DataProvider.ins.DB.Supliers.Add(Suplier);
-                DataProvider.ins.DB.SaveChanges();
+                        DataProvider.ins.DB.Supliers.Add(Suplier);
+                        DataProvider.ins.DB.SaveChanges();
 
-                List.Add(Suplier);
+                        List.Add(Suplier);
+                    } else
+                    {
+                        MessageBox.Show("Please fill all");
+                    }
+                        
+                }
+                catch (Exception)
+                {
+
+                    MessageBox.Show("Error");
+                }
+                
             });
 
             EditCommand = new RelayCommand<object>((p) =>
@@ -88,16 +106,32 @@ namespace manage_inventory.ViewModel
 
             }, (p) =>
             {
-                var Suplier = DataProvider.ins.DB.Supliers.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
-                Suplier.DisplayName = DisplayName;
-                Suplier.Phone = Phone;
-                Suplier.Address = Address;
-                Suplier.Email = Email;
-                Suplier.ContractDate = ContractDate;
-                Suplier.MoreInfo = MoreInfo;
-                DataProvider.ins.DB.SaveChanges();
+                try
+                {
+                    var Suplier = DataProvider.ins.DB.Supliers.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
+                    if(!DisplayName.IsNullOrEmpty() && !Phone.IsNullOrEmpty() && !Address.IsNullOrEmpty() && !Email.IsNullOrEmpty() && ContractDate != null && !MoreInfo.IsNullOrEmpty())
+                    {
+                        Suplier.DisplayName = DisplayName;
+                        Suplier.Phone = Phone;
+                        Suplier.Address = Address;
+                        Suplier.Email = Email;
+                        Suplier.ContractDate = ContractDate;
+                        Suplier.MoreInfo = MoreInfo;
+                        DataProvider.ins.DB.SaveChanges();
+                        SelectedItem.DisplayName = DisplayName;
 
-                SelectedItem.DisplayName = DisplayName;
+                    } else
+                    {
+                        MessageBox.Show("Please fill all");
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    
+                }
+                
             });
 
             DeleteCommand = new RelayCommand<object>((p) =>
@@ -109,12 +143,21 @@ namespace manage_inventory.ViewModel
 
             }, (p) =>
             {
-                var Suplier = DataProvider.ins.DB.Supliers.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
-                if (Suplier != null)
+                try
                 {
-                    DataProvider.ins.DB.Supliers.Remove(Suplier);
-                    DataProvider.ins.DB.SaveChanges();
-                    List.Remove(Suplier);
+                    var Suplier = DataProvider.ins.DB.Supliers.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
+                    if (Suplier != null)
+                    {
+                        DataProvider.ins.DB.Supliers.Remove(Suplier);
+                        DataProvider.ins.DB.SaveChanges();
+                        List.Remove(Suplier);
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                    MessageBox.Show("Can not delete this supplier");
                 }
             });
         }
