@@ -79,7 +79,7 @@ public partial class QuanLyKhoContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__InputInfo__IdInp__4BAC3F29");
 
-            entity.HasOne(d => d.IdObjectNavigation).WithMany(p => p.InputInfos)
+            entity.HasOne(d => d.IdObjectNavigation).WithMany(p => p.InputInfoes)
                 .HasForeignKey(d => d.IdObject)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__InputInfo__IdObj__4CA06362");
@@ -92,14 +92,16 @@ public partial class QuanLyKhoContext : DbContext
             entity.ToTable("Object");
 
             entity.Property(e => e.Id).HasMaxLength(128);
-            entity.Property(e => e.Qrcode).HasColumnName("QRCode");
+            entity.Property(e => e.QRCode).HasColumnName("QRCode");
 
-            entity.HasOne(d => d.IdSuplierNavigation).WithMany(p => p.Objects)
+            entity.HasOne(d => d.Suplier)
+                .WithMany(p => p.Objects)
                 .HasForeignKey(d => d.IdSuplier)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Object__IdSuplie__4E88ABD4");
 
-            entity.HasOne(d => d.IdUnitNavigation).WithMany(p => p.Objects)
+            entity.HasOne(d => d.Unit)
+                .WithMany(p => p.Objects)
                 .HasForeignKey(d => d.IdUnit)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Object__IdUnit__4D94879B");
@@ -130,12 +132,12 @@ public partial class QuanLyKhoContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__OutputInfo__Id__412EB0B6");
 
-            entity.HasOne(d => d.IdCustomerNavigation).WithMany(p => p.OutputInfos)
+            entity.HasOne(d => d.IdCustomerNavigation).WithMany(p => p.OutputInfoes)
                 .HasForeignKey(d => d.IdCustomer)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__OutputInf__IdCus__4F7CD00D");
 
-            entity.HasOne(d => d.IdObjectNavigation).WithMany(p => p.OutputInfos)
+            entity.HasOne(d => d.IdObjectNavigation).WithMany(p => p.OutputInfoes)
                 .HasForeignKey(d => d.IdObject)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__OutputInf__IdObj__5070F446");
