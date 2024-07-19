@@ -1,25 +1,34 @@
-﻿using System;
+﻿using manage_inventory.ViewModel;
+using System;
 using System.Collections.Generic;
 
-namespace manage_inventory.Models;
-
-public partial class InputInfo
+namespace manage_inventory.Models
 {
-    public string Id { get; set; } = null!;
+    public partial class InputInfo : BaseViewModel
+    {
+        private string _Id;
+        public string Id { get => _Id; set { _Id = value; OnPropertyChanged(); } }
 
-    public string IdObject { get; set; } = null!;
+        private string _IdObject;
+        public string IdObject { get => _IdObject; set { _IdObject = value; OnPropertyChanged(); } }
 
-    public string IdInput { get; set; } = null!;
+        private string _IdInput;
+        public string IdInput { get => _IdInput; set { _IdInput = value; OnPropertyChanged(); } }
 
-    public int? Count { get; set; }
+        private int? _Count;
+        public int? Count { get => _Count; set { _Count = value; OnPropertyChanged(); } }
 
-    public double? InputPrice { get; set; }
+        private double? _InputPrice;
+        public double? InputPrice { get => _InputPrice; set { _InputPrice = value; OnPropertyChanged(); } }
 
-    public double? OutputPrice { get; set; }
+        private double? _OutputPrice;
+        public double? OutputPrice { get => _OutputPrice; set { _OutputPrice = value; OnPropertyChanged(); } }
 
-    public string? Status { get; set; }
+        private string _Status;
+        public string Status { get => _Status; set { _Status = value; OnPropertyChanged(); } }
 
-    public virtual Input IdInputNavigation { get; set; } = null!;
+        public virtual Input IdInputNavigation { get; set; } = null!;
 
-    public virtual Object IdObjectNavigation { get; set; } = null!;
+        public virtual Object IdObjectNavigation { get; set; } = null!;
+    }
 }
