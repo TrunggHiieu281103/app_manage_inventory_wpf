@@ -51,7 +51,7 @@
                 <WrapPanel>
                     <Button Command="{Binding AddCommand}" Content="Add" Margin="5" Width="100"></Button>
                     <Button Command="{Binding EditCommand}" Content="Update" Margin="5" Width="100"></Button>
-                    <Button Command="{Binding DeleteCommand}" Content="Delete" Margin="5" Width="100"></Button>
+                    <!--<Button Command="{Binding DeleteCommand}" Content="Delete" Margin="5" Width="100"></Button>-->
                 </WrapPanel>
             </materialDesign:Card>
 

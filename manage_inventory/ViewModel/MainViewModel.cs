@@ -118,8 +118,10 @@ namespace manage_inventory.ViewModel
                 tonkho.Object = item;
                 tonkho.unitName = unitName;
                 tonkho.supplierName = supplierName;
-
-                TonKhoList.Add(tonkho);
+                if(tonkho.Count > 0)
+                {
+                    TonKhoList.Add(tonkho);
+                }
                 i++;
             }
         }

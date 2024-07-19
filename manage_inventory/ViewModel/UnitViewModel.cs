@@ -41,13 +41,17 @@ namespace manage_inventory.ViewModel
 
             AddCommand = new RelayCommand<object>((p) => 
             {
-                if (string.IsNullOrEmpty(DisplayName))
+                if (string.IsNullOrEmpty(DisplayName)) { 
                     return false;
+
+                }
 
                 var displayList = DataProvider.ins.DB.Units.Where(x => x.DisplayName == DisplayName);
 
-                if(displayList == null || displayList.Count() != 0) 
+                if(displayList == null || displayList.Count() != 0)
+                {
                     return false;
+                }
 
                 return true;
             }, (p) => 
