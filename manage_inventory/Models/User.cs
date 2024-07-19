@@ -1,19 +1,24 @@
-﻿using System;
+﻿using manage_inventory.ViewModel;
+using System;
 using System.Collections.Generic;
 
 namespace manage_inventory.Models;
 
-public partial class User
+public partial class User : BaseViewModel
 {
     public int Id { get; set; }
 
-    public string? DisplayName { get; set; }
+    private string _DisplayName;
+    public string DisplayName { get=> _DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
 
-    public string? UserName { get; set; }
+    private string _UserName;
+    public string  UserName { get => _UserName; set { _UserName = value; OnPropertyChanged(); } }
 
-    public string? Password { get; set; }
+    private string _Password;
+    public string Password { get => _Password; set { _Password = value; OnPropertyChanged(); } }
 
-    public int IdRole { get; set; }
+    private int _IdRole;
+    public int IdRole { get => _IdRole; set { _IdRole = value; OnPropertyChanged(); } }
 
     public virtual UserRole IdRoleNavigation { get; set; } = null!;
 }
